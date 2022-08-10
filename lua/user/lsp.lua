@@ -17,7 +17,7 @@ M.setup = function(lsp_mappings)
 
   -- Enable the following language servers
   -- local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
-  local servers = { 'pyright', 'gopls', 'psalm'}
+  local servers = { 'pyright', 'gopls', 'psalm', 'sumneko_lua' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
