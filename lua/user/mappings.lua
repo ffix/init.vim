@@ -11,16 +11,41 @@ vim.g.maplocalleader = ' '
 keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
+--Ignore due to vim-surround mapping
+-- wk.register({
+--   ["c"] = "which_key_ignore",
+--   ["d"] = "which_key_ignore",
+--   ["y"] = "which_key_ignore",
+-- })
+
+--Add leader shortcuts
+wk.register({
+  s = {
+    name = 'Search',
+    f = { '<cmd>Telescope find_files previewer=false<cr>', 'Find File' },
+    b = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Find in Buffer' },
+    g = { '<cmd>Telescope grep_string<cr>', 'Grep' },
+    d = { '<cmd>Telescope diagnostics<cr>', 'Diagnostics' },
+    h = { '<cmd>Telescope help_tags<CR>', 'Help tags' },
+    t = { '<cmd>Telescope tags<CR>', 'Tags' },
+    p = { '<cmd>Telescope live_grep<CR>', 'Live grep' },
+    o = { '<cmd>Telescope current_buffer_tags<CR>', 'Tags only in current buffer' },
+
+  },
+  e = { '<cmd>NvimTreeToggle<CR>', 'File Explorer' },
+  c = { '<cmd>Bdelete<CR>', 'Close Buffer' },
+  t = {
+    name = 'File Tree',
+    r = { '<cmd>NvimTreeRefresh<CR>', 'Refresh' },
+    f = { '<cmd>NvimTreeFindFile<CR>', 'Find File' },
+    c = { '<cmd>NvimTreeCollapse<CR>', 'Collapse' },
+  },
+}, { prefix = '<leader>' })
+
+
 --Add leader shortcuts
 wk.register({
   ['<leader>s'] = {
-    f = { '<cmd>Telescope find_files previewer=false<CR>', 'Find files' },
-    b = { '<cmd>Telescope current_buffer_fuzzy_find<CR>', 'Fuzzy find in current buffer' },
-    h = { '<cmd>Telescope help_tags<CR>', 'Help tags' },
-    t = { '<cmd>Telescope tags<CR>', 'Tags' },
-    d = { '<cmd>Telescope grep_string<CR>', 'Grep a string' },
-    p = { '<cmd>Telescope live_grep<CR>', 'Live grep' },
-    o = { '<cmd>Telescope current_buffer_tags<CR>', 'Tags only in current buffer' },
   },
 
   ['<leader><space>'] = { '<cmd>Telescope buffers<CR>', 'Show opened buffers' },
@@ -55,8 +80,7 @@ end
 keymap('n', '<F10>', '<cmd>lua ToggleMouse()<cr>', opts)
 
 -- hard mode
-vim.api.nvim_exec(
-  [[
+vim.cmd [[
     nnoremap <buffer> <Left> <Nop>
     nnoremap <buffer> <Right> <Nop>
     nnoremap <buffer> <Up> <Nop>
@@ -83,26 +107,33 @@ vim.api.nvim_exec(
 
     nnoremap <buffer> - <Nop>
     nnoremap <buffer> + <Nop>
-  ]],
-  false
-)
+]]
 keymap('n', '<C-c><C-c>', [[<cmd>lua require('bufdelete').bufdelete(0, false)<CR>]], opts)
 
 -- langmap
-vim.api.nvim_exec(
-  [[
+vim.cmd [[
     set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-  ]],
-  false
-)
+]]
 
 -- Clear highlighting on escape in normal mode
 keymap('n', '<Esc>', ':noh<CR><Esc>', opts)
 
-wk.register({
-  s = { '<cmd>HopChar2<cr>', 'Hop Char 2' },
-  S = { '<cmd>HopWord<cr>', 'Hop Word' },
-})
+wk.register(
+  {
+    s = { '<cmd>HopWord<cr>', 'Hop word' },
+    f = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+      "Hop char after cursor" },
+    F = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
+      "Hop char before cursor" },
+    t = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
+      "Hop char after cursor and jump one character before" },
+    T = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
+      'Hop char after cursor and jump one character before' },
+  },
+  {
+    mode = ''
+  }
+)
 
 local M = {}
 M.lsp_mappings = function(bufnr)

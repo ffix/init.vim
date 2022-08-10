@@ -5,22 +5,25 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-vim.api.nvim_exec(
-  [[
+vim.cmd [[
   augroup Packer
     autocmd!
     autocmd BufWritePost plugins.lua PackerCompile
   augroup end
-  ]],
-  false
-)
+]]
 
 local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
-  use 'tpope/vim-fugitive' -- Git commands in nvim
-  use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-  use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
+  -- use 'tpope/vim-fugitive' -- Git commands in nvim
+  -- use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
+  -- use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
   use 'ludovicchabant/vim-gutentags' -- Automatic tags management
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
@@ -55,7 +58,7 @@ require('packer').startup(function()
   -- use 'lyokha/vim-xkbswitch'
   use 'Pocco81/NoCLC.nvim'
   use 'ahmedkhalf/project.nvim'
-  use 'tpope/vim-surround'
+  -- use 'tpope/vim-surround'
   use 'tpope/vim-sleuth'
   use 'tpope/vim-repeat'
   use 'windwp/nvim-autopairs'

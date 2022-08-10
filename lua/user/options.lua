@@ -41,15 +41,12 @@ vim.cmd [[colorscheme gruvbox]]
 vim.o.completeopt = 'menuone,noselect'
 
 -- Highlight on yank
-vim.api.nvim_exec(
-  [[
+vim.cmd [[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
-]] ,
-  false
-)
+]]
 
 vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 4 -- insert 2 spaces for a tab
@@ -94,9 +91,17 @@ vim.o.list = true
 vim.o.spell = true
 vim.o.spelllang = 'en_us,ru'
 
+-- cursor lines
+vim.cmd [[
+  augroup cursorline
+    autocmd!
+    autocmd WinEnter,BufEnter * setlocal cursorline cursorcolumn
+    autocmd WinLeave,BufLeave * setlocal nocursorline nocursorcolumn
+  augroup END
+]]
+
 -- set window title
-vim.api.nvim_exec(
-  [[
+vim.cmd [[
   let my_asciictrl = nr2char(127)
   let my_unisubst = "␡"
   for i in range(1, 31)
@@ -108,6 +113,4 @@ vim.api.nvim_exec(
     autocmd BufEnter * let &titlestring = "vim " . tr(expand("%:t"), my_asciictrl, my_unisubst)
     autocmd BufEnter * set title
   augroup END
-  ]],
-  false
-)
+]]

@@ -154,12 +154,6 @@ require('nvim-tree').setup({
   },
 })
 
--- clc
-require('no-clc').setup({
-  load_at_startup = true,
-  cursorline = true,
-  cursorcolumn = true
-})
 
 -- autopairs
 require('nvim-autopairs').setup {}
