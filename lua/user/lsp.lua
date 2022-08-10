@@ -8,7 +8,7 @@ M.setup = function(lsp_mappings)
 
     lsp_mappings(bufnr)
 
-    require'illuminate'.on_attach(client)
+    require 'illuminate'.on_attach(client)
   end
 
   -- nvim-cmp supports additional completion capabilities
@@ -17,13 +17,35 @@ M.setup = function(lsp_mappings)
 
   -- Enable the following language servers
   -- local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
-  local servers = { 'pyright', 'gopls', 'psalm', 'sumneko_lua' }
+  local servers = { 'pyright', 'gopls', 'psalm' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
       capabilities = capabilities,
     }
   end
+  nvim_lsp.sumneko_lua.setup {
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { 'vim' },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  }
 end
 
 return M

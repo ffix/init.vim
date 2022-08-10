@@ -25,11 +25,11 @@ require('packer').startup(function()
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   -- use 'joshdick/onedark.vim' -- Theme inspired by Atom
-  use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}} -- gruvbox theme
+  use { 'ellisonleao/gruvbox.nvim', requires = { 'rktjmp/lush.nvim' } } -- gruvbox theme
   -- use 'itchyny/lightline.vim' -- Fancier statusline
   use {
-  'hoob3rt/lualine.nvim',
-  requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    'hoob3rt/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
   use 'arkav/lualine-lsp-progress'
   -- Add indentation guides even on blank lines
@@ -65,14 +65,13 @@ require('packer').startup(function()
     'phaazon/hop.nvim',
     branch = 'v2',
     config = function()
-      require'hop'.setup {}
+      require 'hop'.setup {}
     end
   }
   use {
-  "folke/which-key.nvim",
-  config = function()
-    require("which-key").setup {}
-  end
-}
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup {}
+    end
+  }
 end)
-

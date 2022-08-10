@@ -1,19 +1,17 @@
-
 --Set statusbar
-require('lualine').setup{
+require('lualine').setup {
   tabline = {
-    lualine_a = {'buffers'},
+    lualine_a = { 'buffers' },
   },
   sections = {
-    lualine_b = {{'diagnostics', sources={'nvim_lsp'}}, 'FugitiveHead'},
-    lualine_c = {{'filename', path=1}, 'lsp_progress'},
+    lualine_b = { { 'diagnostics', sources = { 'nvim_lsp' } }, 'FugitiveHead' },
+    lualine_c = { { 'filename', path = 1 }, 'lsp_progress' },
   },
   inactive_sections = {
-    lualine_c = {{'filename', path=1}},
+    lualine_c = { { 'filename', path = 1 } },
   },
-  extensions = {'fugitive', 'quickfix', 'nvim-tree'}
+  extensions = { 'fugitive', 'quickfix', 'nvim-tree' }
 }
-
 
 -- Gitsigns
 require('gitsigns').setup {
@@ -54,7 +52,7 @@ require('nvim-treesitter.configs').setup {
   },
   indent = {
     enable = true,
---    disable = {"python"},
+    --    disable = {'python'},
   },
   textobjects = {
     select = {
@@ -92,9 +90,8 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- luasnip setup
-require('luasnip/loaders/from_vscode').load({ include = { 'python', 'go', 'php'} }) -- Load only python snippets
+require('luasnip/loaders/from_vscode').load({ include = { 'python', 'go', 'php' } }) -- Load only python snippets
 local luasnip = require 'luasnip'
-
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -141,10 +138,10 @@ cmp.setup {
 }
 
 -- project
-require("project_nvim").setup {}
+require('project_nvim').setup {}
 require('telescope').load_extension('projects')
 
-require("nvim-tree").setup({
+require('nvim-tree').setup({
   respect_buf_cwd = true,
   update_cwd = true,
   update_focused_file = {
@@ -153,25 +150,21 @@ require("nvim-tree").setup({
   },
   filters = {
     dotfiles = true,
-    custom = {'.git', 'venv', '__pycache__', 'vendor'},
+    custom = { '.git', 'venv', '__pycache__', 'vendor' },
   },
 })
 
-
 -- clc
-require("no-clc").setup({
+require('no-clc').setup({
   load_at_startup = true,
   cursorline = true,
   cursorcolumn = true
 })
 
-
-
 -- autopairs
-require('nvim-autopairs').setup{}
+require('nvim-autopairs').setup {}
 
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local cmp = require('cmp')
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))

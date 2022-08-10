@@ -47,7 +47,7 @@ vim.api.nvim_exec(
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
-]],
+]] ,
   false
 )
 
@@ -92,7 +92,7 @@ vim.o.list = true
 
 -- spell
 vim.o.spell = true
-vim.o.spelllang='en_us,ru'
+vim.o.spelllang = 'en_us,ru'
 
 -- set window title
 vim.api.nvim_exec(
@@ -111,4 +111,3 @@ vim.api.nvim_exec(
   ]],
   false
 )
-

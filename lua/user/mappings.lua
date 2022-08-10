@@ -1,12 +1,11 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
-local wk = require("which-key")
+local wk = require('which-key')
 
 --Remap space as leader key
 keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
 
 --Remap for dealing with word wrap
 keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
@@ -14,45 +13,42 @@ keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, sil
 
 --Add leader shortcuts
 wk.register({
-  ["<leader>s"] = {
-    f = {"<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>", "Find files"},
-    b = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", "Fuzzy find in current buffer"},
-    h = {"<cmd>lua require('telescope.builtin').help_tags()<CR>", "Help tags"},
-    t = {"<cmd>lua require('telescope.builtin').tags()<CR>", "Tags"},
-    d = {"<cmd>lua require('telescope.builtin').grep_string()<CR>", "Grep a string"},
-    p = {"<cmd>lua require('telescope.builtin').live_grep()<CR>", "Live grep"},
-    o = {"<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>", "Tags only in current buffer"},
+  ['<leader>s'] = {
+    f = { '<cmd>Telescope find_files previewer=false<CR>', 'Find files' },
+    b = { '<cmd>Telescope current_buffer_fuzzy_find<CR>', 'Fuzzy find in current buffer' },
+    h = { '<cmd>Telescope help_tags<CR>', 'Help tags' },
+    t = { '<cmd>Telescope tags<CR>', 'Tags' },
+    d = { '<cmd>Telescope grep_string<CR>', 'Grep a string' },
+    p = { '<cmd>Telescope live_grep<CR>', 'Live grep' },
+    o = { '<cmd>Telescope current_buffer_tags<CR>', 'Tags only in current buffer' },
   },
- 
-  ['<leader><space>'] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Show opened buffers"},
-  ['<C-b>'] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Show old files"},
-  ['<C-p>'] = { "<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>", "Find files"},
+
+  ['<leader><space>'] = { '<cmd>Telescope buffers<CR>', 'Show opened buffers' },
+  ['<C-b>'] = { '<cmd>Telescope oldfiles<CR>', 'Show old files' },
+  ['<C-p>'] = { '<cmd>Telescope find_files previewer=false<CR>', 'Find files' },
 
 })
 
-
 keymap('n', '<C-n>', [[<cmd>lua require('nvim-tree').toggle()<CR>]], opts)
-
-
 
 -- Toggle to disable mouse mode and indentlines for easier paste
 ToggleMouse = function()
   if vim.o.mouse == 'a' then
-    vim.cmd[[IndentBlanklineDisable]]
-    vim.wo.signcolumn='no'
+    vim.cmd [[IndentBlanklineDisable]]
+    vim.wo.signcolumn = 'no'
     vim.o.mouse = 'v'
     vim.o.relativenumber = false
     vim.wo.number = false
     vim.o.list = false
-    print("Mouse disabled")
+    print('Mouse disabled')
   else
-    vim.cmd[[IndentBlanklineEnable]]
-    vim.wo.signcolumn='yes'
+    vim.cmd [[IndentBlanklineEnable]]
+    vim.wo.signcolumn = 'yes'
     vim.o.mouse = 'a'
     vim.o.relativenumber = true
     vim.wo.number = true
     vim.o.list = true
-    print("Mouse enabled")
+    print('Mouse enabled')
   end
 end
 
@@ -92,7 +88,6 @@ vim.api.nvim_exec(
 )
 keymap('n', '<C-c><C-c>', [[<cmd>lua require('bufdelete').bufdelete(0, false)<CR>]], opts)
 
-
 -- langmap
 vim.api.nvim_exec(
   [[
@@ -104,10 +99,9 @@ vim.api.nvim_exec(
 -- Clear highlighting on escape in normal mode
 keymap('n', '<Esc>', ':noh<CR><Esc>', opts)
 
-
 wk.register({
-  s = {"<cmd>HopChar2<cr>", "Hop Char 2"},
-  S = {"<cmd>HopWord<cr>", "Hop Word"},
+  s = { '<cmd>HopChar2<cr>', 'Hop Char 2' },
+  S = { '<cmd>HopWord<cr>', 'Hop Word' },
 })
 
 local M = {}
@@ -119,8 +113,8 @@ M.lsp_mappings = function(bufnr)
     g = {
       d = { '<cmd>Telescope lsp_definitions show_line=false<CR>', 'Go to definition' },
       D = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Go to declaration' },
-      i = { '<cmd>Telescope lsp_implementations show_line=false<CR>', "Show implementation"},
-      r = { '<cmd>Telescope lsp_references show_line=false<CR>', "Show references"},
+      i = { '<cmd>Telescope lsp_implementations show_line=false<CR>', 'Show implementation' },
+      r = { '<cmd>Telescope lsp_references show_line=false<CR>', 'Show references' },
     },
     ['<leader>l'] = {
       name = 'Lsp',
