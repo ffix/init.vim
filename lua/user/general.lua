@@ -16,6 +16,9 @@ require('lualine').setup {
 -- Gitsigns
 require('gitsigns').setup {}
 
+-- DiffView
+require("diffview").setup{}
+
 -- Telescope
 local telescope = require('telescope')
 telescope.setup {

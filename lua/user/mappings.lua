@@ -13,29 +13,30 @@ keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, sil
 -- Search
 keymap('n', '<leader>sf', '<cmd>Telescope find_files previewer=false<cr>', opts)
 keymap('n', '<leader>sb', '<cmd>Telescope current_buffer_fuzzy_find<cr>', opts)
-keymap('n', '<leader>sg', '<cmd>Telescope grep_string previewer=false<cr>', opts)
+keymap('n', '<leader>sg', '<cmd>Telescope grep_string<cr>', opts)
 keymap('n', '<leader>sd', '<cmd>Telescope diagnostics<cr>', opts)
 keymap('n', '<leader>sh', '<cmd>Telescope help_tags<CR>', opts)
 keymap('n', '<leader>st', '<cmd>Telescope tags<CR>', opts)
 keymap('n', '<leader>sp', '<cmd>Telescope live_grep<CR>', opts)
 keymap('n', '<leader>so', '<cmd>Telescope current_buffer_tags<CR>', opts)
-
+-- Quickfix
 keymap('n', '<leader>qf', '<cmd>Telescope quickfix<CR>', opts)
 keymap('n', '<leader>qh', '<cmd>Telescope quickfixhistory<CR>', opts)
-
-keymap('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', opts)
-keymap('n', '<leader>c', '<cmd>Bdelete<CR>', opts)
--- File tree
-keymap('n', ' <leader>tr', '<cmd>NvimTreeRefresh<CR>', opts)
-keymap('n', '<leader>tf', '<cmd>NvimTreeFindFile<CR>', opts)
-keymap('n', '<leader>tc', '<cmd>NvimTreeCollapse<CR>', opts)
-
+-- Resume
+keymap('n', '<leader>r', '<cmd>Telescope resume<CR>', opts)
+-- Files
 keymap('n', '<leader><space>', '<cmd>Telescope buffers<CR>', opts)
 keymap('n', '<C-b>', '<cmd>Telescope oldfiles<CR>', opts)
 keymap('n', '<C-p>', '<cmd>Telescope find_files previewer=false<CR>', opts)
+-- File tree
+keymap('n', '<leader>tr', '<cmd>NvimTreeRefresh<CR>', opts)
+keymap('n', '<leader>tf', '<cmd>NvimTreeFindFile<CR>', opts)
+keymap('n', '<leader>tc', '<cmd>NvimTreeCollapse<CR>', opts)
+keymap('n', '<leader>tt', '<cmd>NvimTreeToggle<CR>', opts)
+
+keymap('n', '<leader>c', '<cmd>Bdelete<CR>', opts)
 
 
-keymap('n', '<C-n>', [[<cmd>lua require('nvim-tree').toggle()<CR>]], opts)
 
 -- Toggle to disable mouse mode and indentlines for easier paste
 ToggleMouse = function()
@@ -59,36 +60,6 @@ ToggleMouse = function()
 end
 
 keymap('n', '<F10>', '<cmd>lua ToggleMouse()<cr>', opts)
-
--- hard mode
-vim.cmd [[
-    nnoremap <buffer> <Left> <Nop>
-    nnoremap <buffer> <Right> <Nop>
-    nnoremap <buffer> <Up> <Nop>
-    nnoremap <buffer> <Down> <Nop>
-    nnoremap <buffer> <PageUp> <Nop>
-    nnoremap <buffer> <PageDown> <Nop>
-
-    inoremap <buffer> <Left> <Nop>
-    inoremap <buffer> <Right> <Nop>
-    inoremap <buffer> <Up> <Nop>
-    inoremap <buffer> <Down> <Nop>
-    inoremap <buffer> <PageUp> <Nop>
-    inoremap <buffer> <PageDown> <Nop>
-
-    vnoremap <buffer> <Left> <Nop>
-    vnoremap <buffer> <Right> <Nop>
-    vnoremap <buffer> <Up> <Nop>
-    vnoremap <buffer> <Down> <Nop>
-    vnoremap <buffer> <PageUp> <Nop>
-    vnoremap <buffer> <PageDown> <Nop>
-
-    vnoremap <buffer> - <Nop>
-    vnoremap <buffer> + <Nop>
-
-    nnoremap <buffer> - <Nop>
-    nnoremap <buffer> + <Nop>
-]]
 
 -- langmap
 vim.cmd [[
