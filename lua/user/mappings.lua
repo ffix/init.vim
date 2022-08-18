@@ -111,7 +111,7 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 local M = {}
-M.lsp_mappings = function(bufnr)
+M.lsp_mappings = function(_)
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting_sync()' ]]
     keymap("i", "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     -- Lsp
