@@ -1,5 +1,5 @@
 --Incremental live completion (note: this is now a default on master)
-vim.o.inccommand = 'nosplit'
+vim.o.inccommand = "nosplit"
 
 --Set highlight on search
 vim.o.hlsearch = true
@@ -11,7 +11,7 @@ vim.wo.number = true
 vim.o.hidden = true
 
 --Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 --Enable break indent
 vim.o.breakindent = true
@@ -30,7 +30,7 @@ vim.o.smartcase = true
 --Decrease update time
 vim.o.updatetime = 250
 -- vim.o.updatetime = 750
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
@@ -38,7 +38,7 @@ vim.o.termguicolors = true
 vim.cmd [[colorscheme gruvbox]]
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
 -- Highlight on yank
 vim.cmd [[
@@ -56,14 +56,14 @@ vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 4 -- insert 2 spaces for a tab
 vim.opt.expandtab = true
 
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = 'go',
-  callback = function()
-    vim.bo.expandtab = false
-  end,
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = "go",
+    callback = function()
+        vim.bo.expandtab = false
+    end,
 })
 
-vim.g.gotests_template = 'testify'
+vim.g.gotests_template = "testify"
 
 --Map blankline
 -- vim.g.indent_blankline_char = '┊'
@@ -73,29 +73,31 @@ vim.g.gotests_template = 'testify'
 -- vim.g.indent_blankline_show_trailing_blankline_indent = false
 
 -- gutentags
-vim.g.gutentags_cache_dir = vim.fn.expand('~/.cache/nvim/ctags/')
-vim.g.gutentags_file_list_command = 'rg --files'
+vim.g.gutentags_cache_dir = vim.fn.expand "~/.cache/nvim/ctags/"
+vim.g.gutentags_file_list_command = "rg --files"
 vim.g.gutentags_generate_on_new = true
 vim.g.gutentags_generate_on_missing = true
 vim.g.gutentags_generate_on_write = true
 vim.g.gutentags_generate_on_empty_buffer = false
 
 vim.g.gutentags_ctags_exclude = {
-  '*.git', '*.svg', '*.hg',
-  '*.json',
-  '*.md',
+    "*.git",
+    "*.svg",
+    "*.hg",
+    "*.json",
+    "*.md",
 }
 
-vim.o.clipboard = 'unnamed,unnamedplus'
+vim.o.clipboard = "unnamed,unnamedplus"
 vim.o.relativenumber = true
 vim.o.tabstop = 4
 
-vim.o.listchars = 'tab:▸▸,trail:¬,nbsp:.,extends:❯,precedes:❮'
+vim.o.listchars = "tab:▸▸,trail:¬,nbsp:.,extends:❯,precedes:❮"
 vim.o.list = true
 
 -- spell
 vim.o.spell = true
-vim.o.spelllang = 'en_us,ru'
+vim.o.spelllang = "en_us,ru"
 
 -- cursor lines
 vim.cmd [[
